@@ -1,0 +1,2 @@
+# firstPython-project
+Learning python
