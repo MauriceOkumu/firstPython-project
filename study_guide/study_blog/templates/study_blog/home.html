@@ -1,0 +1,10 @@
+{% extends 'study_blog/base.html'%}
+{% block content%}
+    <h1>Home of studies</h1>
+    {% for study in studies%}
+        <p>{{study.title}}</p>
+        <p>Created on {{study.date_posted|date:"F d, Y"}}</p>
+        <a href={{study.content}}>Study content</a> 
+        <p>{{study.author}}</p>
+    {% endfor %}
+{% endblock content%}
