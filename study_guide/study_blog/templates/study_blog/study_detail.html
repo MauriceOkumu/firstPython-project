@@ -1,0 +1,8 @@
+{% extends 'study_blog/base.html'%}
+{% block content%}
+    <h1>Home of studies</h1>
+    <p>{{object.title}} uploaded by {{object.author}}</p>
+    <p>Created on {{object.date_posted|date:"F d, Y"}}</p>
+    <a href={{object.content}}>Study content</a> 
+    
+{% endblock content%}

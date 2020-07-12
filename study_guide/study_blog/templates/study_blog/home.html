@@ -3,8 +3,10 @@
     <h1>Home of studies</h1>
     {% for study in studies%}
         <p>{{study.title}}</p>
-        <p>Created on {{study.date_posted|date:"F d, Y"}}</p>
+        <p>Created on {{study.date_posted|date:"F d, Y"}} by {{study.author}}</p>
         <a href={{study.content}}>Study content</a> 
-        <p>{{study.author}}</p>
+        <br />
+        <a class="article-title" href="{% url 'study-detail' study.id %}">Learn More</a>
+        
     {% endfor %}
 {% endblock content%}
