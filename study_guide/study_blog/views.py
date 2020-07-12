@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.views.generic import (
     ListView, 
     DetailView,
-    CreateView
+    CreateView,
+    UpdateView,
+    DeleteView
 )
 from .models import Study
 
@@ -33,6 +35,23 @@ class StudyDetailView(DetailView):
 class StudyCreateView(CreateView):
     model = Study
     fields = ['title', 'content', 'author']
+
+class StudyUpdateView(UserPassesTestMixin, UpdateView):
+    model = Study
+    fields = ['title', 'content', 'author']
+
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
+
+class StudyDeleteView(UserPassesTestMixin, DeleteView):
+    model = Study
+    success_url = '/'
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
+
+  
 
 class AboutView(ListView):
     model = Study

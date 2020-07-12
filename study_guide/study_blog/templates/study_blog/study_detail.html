@@ -4,5 +4,12 @@
     <p>{{object.title}} uploaded by {{object.author}}</p>
     <p>Created on {{object.date_posted|date:"F d, Y"}}</p>
     <a href={{object.content}}>Study content</a> 
+    {% if object.author == user %}
+    <div>
+
+        <a class = "btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'study-update' object.id %}">Update</a>
+        <a class = "btn btn-danger btn-sm mt-1 mb-1" href="{% url 'study-delete' object.id %}">Delete</a>
+    </div>
+    {% endif %}
     
 {% endblock content%}

@@ -3,7 +3,9 @@ from .views import (
     StudyListView, 
     AboutView,
     StudyDetailView, 
-    StudyCreateView
+    StudyCreateView,
+    StudyUpdateView,
+    StudyDeleteView
 )
 # from . import views
 
@@ -14,4 +16,6 @@ urlpatterns = [
     path('about/', AboutView.as_view(), name='study-about'),
      path('study/new/', StudyCreateView.as_view(), name='study-create'),
     path('study/<int:pk>/', StudyDetailView.as_view(), name='study-detail'),
+    path('study/<int:pk>/update/', StudyUpdateView.as_view(), name='study-update'),
+    path('study/<int:pk>/delete/', StudyDeleteView.as_view(), name='study-delete'),
 ]
