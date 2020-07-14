@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views.generic import (
     ListView, 
     DetailView,
@@ -27,6 +27,7 @@ class StudyListView(ListView):
     template_name = 'study_blog/home.html'
     context_object_name = 'studies'
     ordering = ['date_posted']
+    paginate_by = 2
 
 
 class StudyDetailView(DetailView):
@@ -36,7 +37,7 @@ class StudyCreateView(CreateView):
     model = Study
     fields = ['title', 'content', 'author']
 
-class StudyUpdateView(UserPassesTestMixin, UpdateView):
+class StudyUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Study
     fields = ['title', 'content', 'author']
 
@@ -44,7 +45,7 @@ class StudyUpdateView(UserPassesTestMixin, UpdateView):
         post = self.get_object()
         return self.request.user == post.author
 
-class StudyDeleteView(UserPassesTestMixin, DeleteView):
+class StudyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Study
     success_url = '/'
     def test_func(self):

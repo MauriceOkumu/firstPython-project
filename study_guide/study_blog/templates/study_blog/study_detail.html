@@ -1,9 +1,15 @@
 {% extends 'study_blog/base.html'%}
 {% block content%}
-    <h1>Home of studies</h1>
-    <p>{{object.title}} uploaded by {{object.author}}</p>
-    <p>Created on {{object.date_posted|date:"F d, Y"}}</p>
-    <a href={{object.content}}>Study content</a> 
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ object.title }}</a>
+                <small class="text-muted">Created on {{object.date_posted|date:"F d, Y"}} by {{object.author}}</small>
+            </div>
+            <p class="article-content"><a class="mr-2" href={{ object.content }}>Study content</a></p>
+        </div>
+    </article>
     {% if object.author == user %}
     <div>
 
@@ -11,5 +17,5 @@
         <a class = "btn btn-danger btn-sm mt-1 mb-1" href="{% url 'study-delete' object.id %}">Delete</a>
     </div>
     {% endif %}
-    
+        
 {% endblock content%}
